@@ -1,6 +1,6 @@
-# Task Fullstack Project
+# Todo Fullstack Project
 
-A simple fullstack authentication app with a React frontend and Node.js/Express/MongoDB backend.
+A modern fullstack task management application with user authentication, built with React frontend and Node.js/Express/MongoDB backend.
 
 ## Project Structure
 
@@ -15,68 +15,170 @@ Task/
   front-end/          # React frontend (Vite)
     src/              # React source code
       Components/
-        pages/        # Page components (Login, etc.)
-      App.jsx         # Main app component
+        pages/        # Page components (Home, Login, Register, Todo)
+        ProtectedRoute.jsx  # Route protection component
+      App.jsx         # Main app component with routing
       main.jsx        # Entry point
     public/           # Static assets
     package.json      # Frontend dependencies
 ```
 
 ## Features
-- User registration and login
+
+### Authentication & Security
+- User registration and login with email, username, and password
 - Passwords securely hashed with bcrypt
-- MongoDB for user data storage
-- REST API for authentication
-- React login page with error/success handling
+- JWT (JSON Web Token) authentication
+- Protected routes - only authenticated users can access Todo page
+- Automatic logout functionality
 
-## Backend Setup
+### Task Management
+- Create, edit, and delete todo items
+- Each todo has title, description, and status (pending/completed)
+- Toggle todo status between pending and completed
+- Real-time status updates
+- User-specific todo management
 
-1. **Install dependencies:**
+### User Interface
+- responsive design with Tailwind CSS
+- Consistent gradient background across all pages
+- Modern card-based layout
+- Intuitive form controls with proper labels
+- Loading states and error handling
+- Welcome message with username display
+
+### Technical Features
+- MongoDB for persistent user data storage
+- RESTful API endpoints
+- Axios for HTTP requests
+- React Router for navigation
+- Local storage for user session management
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- MongoDB (running locally or cloud instance)
+- npm or yarn package manager
+
+## Installation & Setup
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/SAY007-DEV/Todo-Task-spiderworks
+cd Task
+```
+
+### 2. Backend Setup
+
+1. **Navigate to backend directory:**
    ```bash
    cd back-end
+   ```
+
+2. **Install dependencies:**
+   ```bash
    npm install
    ```
-2. **Configure MongoDB:**
-   - Make sure MongoDB is running locally or update the connection string in `Database/Connection.js`.
-3. **Start the server:**
+
+3. **Install required packages (if not already installed):**
    ```bash
-   node Server.js
+   npm install express mongoose cors bcryptjs jsonwebtoken
    ```
-   - The backend runs by default on `http://localhost:8080` (update if needed).
 
-## Frontend Setup
+4. **Configure MongoDB:**
+   - Make sure MongoDB is running locally
+   - Update the connection string in `Database/Connection.js` if needed
+   - Default connection: `mongodb://localhost:27017/`
 
-1. **Install dependencies:**
+5. **Set up environment variables (optional):**
+   - Create a `.env` file in the backend directory
+   - Add: `JWT_SECRET=your-secret-key-here`
+
+### 3. Frontend Setup
+
+1. **Navigate to frontend directory:**
    ```bash
    cd front-end
+   ```
+
+2. **Install dependencies:**
+   ```bash
    npm install
    ```
-2. **Start the React app:**
+
+3. **Install required packages (if not already installed):**
    ```bash
-   npm run dev
+   npm install axios react-router-dom
    ```
-   - The frontend runs by default on `http://localhost:5173` (Vite default).
 
-## API Endpoints
 
-### Registration
-- **POST** `/Auth/api/register`
-- **Body:** `{ "email": string, "password": string, "username": string }`
-- **Response:** Success or error message
 
-### Login
-- **POST** `/Auth/api/login`
-- **Body:** `{ "email": string, "password": string }`
-- **Response:** Success or error message
+## How to Run the Project
 
-## Notes
-- Make sure backend and frontend are running on different ports.
-- Update API URLs in frontend if backend port changes.
-- Passwords are hashed before storage for security.
-- You can extend the project with JWT authentication, user sessions, or more features as needed.
+### 1. Start the Backend Server
 
-## Folder Naming
-- The backend route folder is currently named `AuthRoues` (typo). Consider renaming to `AuthRoutes` for clarity.
+```bash
+cd back-end
+node Server.js
+```
 
-## License
-MIT 
+The backend will start on `http://localhost:8080`
+
+### 2. Start the Frontend Development Server
+
+In a new terminal:
+
+```bash
+cd front-end
+npm run dev
+```
+
+The frontend will start on `http://localhost:5173`
+
+### 3. Access the Application
+
+Open your browser and navigate to `http://localhost:5173`
+
+
+
+## Application Flow
+
+1. **Home Page** - Welcome screen with Register/Login options
+2. **Registration** - Create new user account
+3. **Login** - Authenticate existing user
+4. **Todo Page** - Protected route for authenticated users
+   - Add new todos with title and description
+   - Edit existing todos
+   - Delete todos
+   - Toggle todo status
+   - Logout functionality
+
+## Security Features
+
+- Passwords are hashed using bcrypt before storage
+- JWT tokens for secure authentication
+- Protected routes prevent unauthorized access
+- Input validation on both frontend and backend
+- Secure session management with localStorage
+
+## Technologies Used
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- bcryptjs
+- jsonwebtoken
+- CORS
+
+### Frontend
+- React
+- React Router
+- Axios
+- Tailwind CSS
+- Vite
+
+
+
+
