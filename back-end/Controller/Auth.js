@@ -1,18 +1,38 @@
 import express from 'express';
+import User from '../Database/Model.js';
 
 const Register = async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
 
-    // Basic validation
-    if (!username ) {
-      return res.status(400).json({ message: 'Username and password are required' });
+const existingUser = await User.findOne({ email });
+    if (existingUser ) {
+      return res.status(400).json({ message: 'User already exists ,please login ' });
     }
+ const newUser = new User({ email, password });
+        await newUser.save();
+        return res.status(201).json({ message: 'New user created successfully' });
 
-
-    return res.status(201).json({ message: 'User registered successfully' });
+   
   } catch (error) {
     console.error('Error during registration:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 }
+
+
+const Login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email });
+     if (!existingUser ) {
+      return res.status(400).json({ message: 'User not exists ,please Register ' });
+    }
+    
+  } catch (error) {
+    
+  }
+}
+
+export {Register,Login}
