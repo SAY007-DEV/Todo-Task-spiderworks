@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -83,6 +83,9 @@ function Register() {
           {error && <div className="text-red-600 text-center mt-2">{error}</div>}
           {success && <div className="text-green-600 text-center mt-2">{success}</div>}
         </form>
+        <div className="mt-4 text-center">
+          <p className="text-gray-600">Already have an account? <Link to="/login" className="text-blue-600 hover:text-blue-800 font-medium">Please login</Link></p>
+        </div>
       </div>
     </div>
   )
